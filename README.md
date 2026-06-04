@@ -17,9 +17,9 @@ are absent from formal verification libraries.
 > an exercise"? If you feel lazy, ask an AI to fill the gap. But whether the
 > proof is right or wrong, Lean will tell you. No hiding.*
 
-## What's here
+## What's in this repo
 
-This repository is a first step: Lyapunov stability theorems verified in Lean.
+A few Lyapunov stability theorems verified in Lean.
 
 | Theorem | Notes | File |
 |---------|-------|------|
