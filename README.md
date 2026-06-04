@@ -14,8 +14,8 @@ are absent from formal verification libraries.
 > is on the table. Gaps have nowhere to hide.*
 
 > *Ever looked for the discrete-time version of a theorem and found only "left as
-> an exercise"? If you feel lazy, ask an AI to fill the gap. But whether the
-> proof is right or wrong, Lean will tell you. No hiding.*
+> an exercise"? If you feel lazy, ask an AI to fill the gap and give you the Lean code. But whether the
+> proof is right or wrong, you will know it. No hiding.*
 
 ## What's in this repo
 
@@ -30,30 +30,26 @@ A few Lyapunov stability theorems verified in Lean.
 
 ## TODO 
 
-- Complete the continuous-time Lyapunov stability proof. Requires Khalil's
-  Theorem 3.3, which I haven't yet formalized — may not be easy, as ODE theory
-  is not yet well developed in Lean.
-- Prove more Lyapunov theorem variants - local, global, asymptotic stability...
-- Prove LaSalle's invariance principle.
+- Prove more discrete-time Lyapunov theorem variants - local, global, asymptotic stability...
+- Complete the continuous-time Lyapunov stability proof. Requires Khalil (2002)'s Theorem 3.3
+  - May not be easy, ODE theory is not yet fully developed in Lean.
 - ...
 
 
 ## Build
 
 For a quick look without installing anything, try the
-[Lean 4 online playground](https://live.lean-lang.org) — copy-paste any `.lean`
+[Lean 4 online playground](https://live.lean-lang.org). Copy-paste any `.lean`
 file there and see the proofs compile (Mathlib version may differ slightly from
-this repo).
+this repo - minor compatibility issues are possible).
 
-For local development, follow the
-[Mathlib setup guide](https://leanprover-community.github.io/get_started.html),
+For local development, follow the [Mathlib setup guide](https://leanprover-community.github.io/get_started.html),
 then in the project folder run:
 
-​```bash
-lake exe cache get   # fetch precompiled Mathlib — do this once
+```bash
+lake exe cache get # fetch precompiled Mathlib — do this once
 lake build
-​```
-
+```
 ## References
 
 - H. K. Khalil, *Nonlinear Systems*, 3rd ed. Prentice Hall, 2002.
