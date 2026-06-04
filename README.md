@@ -14,7 +14,7 @@ are not yet there in Lean.
 > is on the table. Gaps have nowhere to hide.*
 > 
 > *Ever looked for the discrete-time version of a theorem and found only "left as
-> an exercise"? If you feel lazy, ask an AI to fill the gap and give you the Lean code. But whether the
+> an exercise"? If you feel lazy, ask AI to fill the gap and give you the Lean code. But whether the
 > generated proof is right or wrong, you will know it.*
 
 ## What's in this repo
