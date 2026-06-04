@@ -5,7 +5,7 @@ only when every step is verified, so nothing informal survives. The payoff is tw
 * Humans get a single, unambiguous, fully-proved reference.
 * AI agents can search for proofs without hallucinating.
 
-Control theory largely been left out so far. Even foundational concepts like Lyapunov stability 
+Control Theory has not yet entered the game. Even foundational concepts like Lyapunov stability 
 are not yet there in Lean.
 
 
