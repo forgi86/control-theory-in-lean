@@ -1,6 +1,6 @@
 # Control Theory in Lean
 
-Formal proof assistants like Lean are reshaping mathematics: a proof is accepted
+Formal proof assistants like [Lean](https://lean-lang.org/learn/) are reshaping mathematics: a proof is accepted
 only when every step is verified, so nothing informal survives. The payoff is twofold:
 * Humans get a single, unambiguous, fully-proved reference.
 * AI agents can search for proofs without hallucinating
