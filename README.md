@@ -3,19 +3,19 @@
 Formal proof assistants like [Lean](https://lean-lang.org/learn/) are reshaping mathematics: a proof is accepted
 only when every step is verified, so nothing informal survives. The payoff is twofold:
 * Humans get a single, unambiguous, fully-proved reference.
-* AI agents can search for proofs without hallucinating
+* AI agents can search for proofs without hallucinating.
 
-Control theory has barely started. Even foundational concepts like Lyapunov stability 
-are absent from formal verification libraries.
+Control theory largely been left out so far. Even foundational concepts like Lyapunov stability 
+are not yet there in Lean.
 
 
 > *Ever read a control paper, reached a theorem, and suspected a hypothesis was
 > quietly missing? In Lean a proof won't compile until every step is spelled out, so the truth
 > is on the table. Gaps have nowhere to hide.*
-
+> 
 > *Ever looked for the discrete-time version of a theorem and found only "left as
 > an exercise"? If you feel lazy, ask an AI to fill the gap and give you the Lean code. But whether the
-> proof is right or wrong, you will know it. No hiding.*
+> generated proof is right or wrong, you will know it.*
 
 ## What's in this repo
 
