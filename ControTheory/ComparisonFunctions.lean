@@ -68,15 +68,23 @@ theorem le_iff (h : ClassK α) {a b : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) :
   h.mono.le_iff_le (mem_Ici.mpr ha) (mem_Ici.mpr hb)
 
 /-- A class-𝒦 function is strictly positive on `(0, ∞)`. -/
-theorem apply_pos (h : ClassK α) {s : ℝ} (hs : 0 < s) : 0 < α s := by
-  sorry
+theorem apply_pos (h : ClassK α) {s : ℝ} (hs : 0 < s) : 0 < α s :=
+  h.zero ▸ h.mono (mem_Ici.mpr le_rfl) (mem_Ici.mpr hs.le) hs
 
 /-- Near `0`, a class-𝒦 function takes values below any positive target.
 Used both for the stability `δ` and for the final squeeze in B.13.
 Hint: `ContinuousWithinAt` of `α` at `0` within `Ici 0`, via `h.cont`. -/
 theorem exists_pos_lt (h : ClassK α) {t : ℝ} (ht : 0 < t) :
     ∃ δ > 0, α δ < t := by
-  sorry
+  obtain ⟨δ, hδpos, hδ⟩ :=
+    Metric.continuousWithinAt_iff.mp (h.cont.continuousWithinAt (mem_Ici.mpr le_rfl)) t ht
+  refine ⟨δ / 2, by linarith, ?_⟩
+  have hmem : (0 : ℝ) ≤ δ / 2 := by linarith
+  have hdist : dist (δ / 2 : ℝ) 0 < δ := by
+    rw [Real.dist_eq, sub_zero, abs_of_pos (by linarith)]; linarith
+  have hlt := hδ (mem_Ici.mpr hmem) hdist
+  rw [h.zero, Real.dist_eq, sub_zero] at hlt
+  exact lt_of_le_of_lt (le_abs_self _) hlt
 
 end ClassK
 
