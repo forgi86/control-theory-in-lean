@@ -19,7 +19,7 @@ are not yet there in Lean.
 
 ## What's in this repo
 
-A few Lyapunov stability theorems verified in Lean.
+In the Examples folder, you'll find a few self-containedLyapunov stability theorems verified in Lean.
 
 | Theorem | Notes | File |
 |---------|-------|------|
@@ -27,14 +27,13 @@ A few Lyapunov stability theorems verified in Lean.
 | Discrete-time Lyapunov stability | Based on Khalil (2002) Theorem 4.1, adapted to discrete time with an additional sublevel-trapping hypothesis | `DTLyapunov.lean` |
 | Discrete-time Lyapunov stability | Modern class-𝒦 comparison-function formulation | `DTLyapunovComparisonFunctions.lean` |
 
-
-## TODO 
+A few more gaps I'd like to fill:
 
 - Prove more discrete-time Lyapunov theorem variants - local, global, asymptotic stability...
 - Complete the continuous-time Lyapunov stability proof. Requires Khalil (2002)'s Theorem 3.3
   - May not be easy, ODE theory is not yet fully developed in Lean.
-- ...
 
+In the ControlTheory folder, there's the sketch for a Lean library for control. In particular, ComparisonFunctions.lean contains definitions and basic theorems of class-𝒦 functions, meant to be reusable to prove more advanced theorems.
 
 ## Build
 
