@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Topology.MetricSpace.HausdorffDistance
 import ControlTheory.ComparisonFunctions
 
 open Set Filter Comparison

@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # Continuous-Time Lyapunov Stability

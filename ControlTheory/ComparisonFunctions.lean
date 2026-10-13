@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Analysis.Normed.Order.Lattice
 
 open Set Filter
 
@@ -102,7 +102,7 @@ appearance of `α₁⁻¹` and `α₂⁻¹` in the B.13 / B.15 proofs.
 Proof outline:
 * strict mono + `α 0 = 0` + `Tendsto α atTop atTop` ⇒ `α '' Ici 0 = Ici 0`
   (surjectivity onto `[0, ∞)`, via `IsPreconnected.intermediate_value_Ici`);
-* `StrictMonoOn.orderIso` + `OrderIso.setCongr` turn that surjectivity into an
+* `StrictMonoOn.orderIso` + `Set.orderIsoOfEq` turn that surjectivity into an
   order isomorphism `e : ↥(Ici 0) ≃o ↥(Ici 0)` agreeing with `α`;
 * `β` is `e.symm` (extended by the identity below `0`); continuity and
   monotonicity of `β` on `Ici 0` come for free from `OrderIso.continuous` and
@@ -121,21 +121,21 @@ theorem exists_inverse (h : ClassKInfty α) :
           (le_principal_iff.mpr (Ici_mem_atTop 0)) h.toClassK.cont h.unbounded
       rwa [h.zero] at hIVT
   set e : ↥(Ici (0 : ℝ)) ≃o ↥(Ici (0 : ℝ)) :=
-    (StrictMonoOn.orderIso α (Ici 0) h.mono).trans (OrderIso.setCongr _ _ himg)
+    (StrictMonoOn.orderIso α (Ici 0) h.mono).trans (Set.orderIsoOfEq _ _ himg)
   have he_apply : ∀ s (hs : 0 ≤ s), (e ⟨s, mem_Ici.mpr hs⟩ : ℝ) = α s := fun s hs => rfl
   set β : ℝ → ℝ := fun t => if ht : 0 ≤ t then (e.symm ⟨t, mem_Ici.mpr ht⟩ : ℝ) else t
   have hβα : ∀ s, 0 ≤ s → β (α s) = s := by
     intro s hs
     have hmem : 0 ≤ α s := h.apply_nonneg hs
     change (if ht : 0 ≤ α s then (e.symm ⟨α s, mem_Ici.mpr ht⟩ : ℝ) else α s) = s
-    rw [dif_pos hmem]
+    rw [dite_eq_left hmem]
     have hpoint : (⟨α s, mem_Ici.mpr hmem⟩ : ↥(Ici (0 : ℝ))) = e ⟨s, mem_Ici.mpr hs⟩ :=
       Subtype.ext (he_apply s hs).symm
     rw [hpoint, e.symm_apply_apply]
   have hαβ : ∀ t, 0 ≤ t → α (β t) = t := by
     intro t ht
     change α (if ht' : 0 ≤ t then (e.symm ⟨t, mem_Ici.mpr ht'⟩ : ℝ) else t) = t
-    rw [dif_pos ht]
+    rw [dite_eq_left ht]
     set y : ↥(Ici (0 : ℝ)) := e.symm ⟨t, mem_Ici.mpr ht⟩ with hy
     change α (y : ℝ) = t
     have hey : (e y : ℝ) = α (y : ℝ) := he_apply (y : ℝ) (mem_Ici.mp y.2)
@@ -148,18 +148,18 @@ theorem exists_inverse (h : ClassKInfty α) :
         (if ht : 0 ≤ y then (e.symm ⟨y, mem_Ici.mpr ht⟩ : ℝ) else y)
     by_cases hx : 0 ≤ x
     · have hy : 0 ≤ y := hx.trans hxy
-      rw [dif_pos hx, dif_pos hy]
+      rw [dite_eq_left hx, dite_eq_left hy]
       exact e.symm.monotone hxy
-    · rw [dif_neg hx]
+    · rw [dite_eq_right hx]
       by_cases hy : 0 ≤ y
-      · rw [dif_pos hy]
+      · rw [dite_eq_left hy]
         have hnn : 0 ≤ (e.symm ⟨y, mem_Ici.mpr hy⟩ : ℝ) := mem_Ici.mp (e.symm ⟨y, mem_Ici.mpr hy⟩).2
         linarith [not_le.mp hx]
-      · rw [dif_neg hy]; exact hxy
+      · rw [dite_eq_right hy]; exact hxy
   refine ⟨β, ⟨⟨?_, ?_, ?_⟩, ?_⟩, hβα, hαβ⟩
   · -- β 0 = 0
     change (if ht : (0:ℝ) ≤ 0 then (e.symm ⟨(0:ℝ), mem_Ici.mpr ht⟩ : ℝ) else (0:ℝ)) = 0
-    rw [dif_pos le_rfl]
+    rw [dite_eq_left le_rfl]
     have hzero_fixed : e (⟨(0:ℝ), mem_Ici.mpr le_rfl⟩ : ↥(Ici (0 : ℝ))) =
         ⟨(0:ℝ), mem_Ici.mpr le_rfl⟩ := Subtype.ext (by rw [he_apply 0 le_rfl, h.zero])
     have hsymm_fixed : e.symm (⟨(0:ℝ), mem_Ici.mpr le_rfl⟩ : ↥(Ici (0 : ℝ))) =
@@ -168,19 +168,19 @@ theorem exists_inverse (h : ClassKInfty α) :
       exact e.symm_apply_apply _
     rw [hsymm_fixed]
   · -- ContinuousOn β (Ici 0)
-    rw [continuousOn_iff_continuous_restrict]
-    have hrestrict : (Ici (0:ℝ)).restrict β = fun x : ↥(Ici (0 : ℝ)) => (e.symm x : ℝ) := by
+    rw [continuousOn_iff_continuous_domRestrict]
+    have hrestrict : (Ici (0:ℝ)).domRestrict β = fun x : ↥(Ici (0 : ℝ)) => (e.symm x : ℝ) := by
       funext x
       change (if ht : 0 ≤ (x:ℝ) then (e.symm ⟨(x:ℝ), mem_Ici.mpr ht⟩ : ℝ) else (x:ℝ)) =
           (e.symm x : ℝ)
-      rw [dif_pos (mem_Ici.mp x.2)]
+      rw [dite_eq_left (mem_Ici.mp x.2)]
     rw [hrestrict]
     exact continuous_subtype_val.comp (OrderIso.continuous e.symm)
   · -- StrictMonoOn β (Ici 0)
     intro x hx y hy hxy
     change (if ht : 0 ≤ x then (e.symm ⟨x, mem_Ici.mpr ht⟩ : ℝ) else x) <
         (if ht : 0 ≤ y then (e.symm ⟨y, mem_Ici.mpr ht⟩ : ℝ) else y)
-    rw [dif_pos (mem_Ici.mp hx), dif_pos (mem_Ici.mp hy)]
+    rw [dite_eq_left (mem_Ici.mp hx), dite_eq_left (mem_Ici.mp hy)]
     exact e.symm.strictMono hxy
   · -- Tendsto β atTop atTop
     refine hmono.tendsto_atTop_atTop (fun b => ⟨α (max b 0), ?_⟩)

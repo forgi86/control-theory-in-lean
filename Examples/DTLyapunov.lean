@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # Discrete-Time Lyapunov Stability (ε-δ formulation)
