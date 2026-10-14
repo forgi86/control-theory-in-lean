@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A Lean 4 + Mathlib formalization of control theory, currently focused on discrete-time Lyapunov stability. Toolchain and Mathlib are pinned (`lean-toolchain`, `lakefile.toml`: Mathlib `v4.34.1`). Lake options enforce `relaxedAutoImplicit = false` and the Mathlib standard linter set, so all variables must be declared explicitly.
+A Lean 4 + Mathlib formalization of control theory, currently focused on discrete-time Lyapunov stability. Toolchain and Mathlib are pinned (`lean-toolchain`, `lakefile.toml`: Mathlib `v4.35.0`). Lake options enforce `relaxedAutoImplicit = false` and the Mathlib standard linter set, so all variables must be declared explicitly.
 
 ## Commands
 

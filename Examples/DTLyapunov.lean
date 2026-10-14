@@ -126,7 +126,7 @@ lemma min_on_sphere_pos
     have hn : 0 < n := by norm_num [n]
     refine ⟨r • EuclideanSpace.single (⟨0, hn⟩ : Fin n) 1, ?_⟩
     rw [Metric.mem_sphere, dist_zero_right, norm_smul]
-    simp [EuclideanSpace.norm_single, abs_of_pos hr]
+    simp [PiLp.norm_single, abs_of_pos hr]
   -- a continuous function on a compact nonempty set attains its minimum
   obtain ⟨x_min, hx_mem, hx_min⟩ :=
     hcompact.exists_isMinOn hne hVc.continuousOn
