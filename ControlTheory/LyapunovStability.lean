@@ -75,7 +75,9 @@ structure IsLyapunov (f : E → E) (dA : E → ℝ) (V : E → ℝ) (α₁ α₂
 `f` w.r.t. a nonnegative distance `dA` implies classical global asymptotic
 stability of the target for `x⁺ = f x`.
 
-Proof structure (see `docs/appendixB_notes.md`):
+Proof structure (cf. the proof of Theorem B.13 in Rawlings, Mayne & Diehl,
+*Model Predictive Control: Theory, Computation, and Design*, 2nd ed., Nob Hill
+Publishing, 2017, Appendix B):
 * **(a) stability** — with `δ := α₂⁻¹(α₁ ε)`, the sublevel bound traps the
   trajectory; uses `ClassKInfty.exists_inverse` for `α₂` and order-reflection.
 * **(b) attractivity** — `V(xᵢ)` is antitone and bounded below, so converges to

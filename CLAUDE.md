@@ -15,7 +15,9 @@ lake build ControlTheory.LyapunovStability  # build a single library module
 lake env lean Examples/DTLyapunov.lean      # check a standalone file (Examples/ is NOT a lake target)
 ```
 
-There is no test suite: "passing" means the file compiles with no errors and no `sorry`. CI (`.github/workflows`) runs `lean-action` (i.e. `lake build`) plus docgen on every push/PR.
+There is no test suite: "passing" means the file compiles with no errors and no `sorry`. There is no CI on GitHub: `.github/workflows` is git-ignored, so the template workflows exist only locally. Verify with a local `lake build`.
+
+**Imports:** never `import Mathlib` (whole-Mathlib loads take minutes). Every file imports only the specific Mathlib modules it needs. When adding code that needs new Mathlib names, add the defining module; `#min_imports` at the end of a file suggests a set, but it can miss names (it missed `Metric.infDist`), so always confirm with a build.
 
 ## Layout and architecture
 
